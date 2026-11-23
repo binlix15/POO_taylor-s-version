@@ -1,5 +1,6 @@
 import models.Hero;
 import operations.OperationCSV;
+import operations.OperationsDB;
 
 import java.util.Scanner;
 
@@ -31,10 +32,12 @@ public class Main
 
             switch (opcion) {
                 case 1:
-                    OperationCSV.saveHero(nextHero());
+                    OperationsDB.saveHeroDB(nextHero());
+                    //OperationCSV.saveHero(nextHero());
                     break;
                 case 2:
-                    OperationCSV.readHeroes();
+                    OperationsDB.readAllHeroresDB();
+                    //OperationCSV.readHeroes();
                     break;
                 case 0:
                     System.out.println("Nos vemos");
@@ -62,8 +65,8 @@ public class Main
         System.out.println("Ingrese el nombre secreto");
         h1.setSecretName(leer.nextLine());
 
-        System.out.println("Ingrese el ID");
-        h1.setId(leer.nextInt());
+        //System.out.println("Ingrese el ID");
+        //h1.setId(leer.nextInt());
 
         System.out.println("Ingrese los poderes");
         String [] tempPowers = new String[3];
