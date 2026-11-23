@@ -8,7 +8,8 @@ public class Hero {
     private String secretName;
     private String [] powers;
     private boolean team; //True para los buenos, false para los malos
-
+    private boolean alive;
+    
     public Hero(int id, String name, String secretName, String[] powers, boolean team) {
         this.id = id;
         this.name = name;

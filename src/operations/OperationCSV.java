@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Operation {
+public class OperationCSV {
     public static void saveHero(Hero newHero)
     {
         try {
@@ -23,7 +23,7 @@ public class Operation {
         }
 
 
-        //TODO Leer todos los heroes
+
         //TODO Leer un solo heroe
         //TODO modificar un heroe
         //TODO eliminar un heroe
