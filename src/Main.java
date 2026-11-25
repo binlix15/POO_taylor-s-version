@@ -1,82 +1,91 @@
-import models.Hero;
-import operations.OperationCSV;
+import db.Database;
+import models.Album;
 import operations.OperationsDB;
 
 import java.util.Scanner;
 
-public class Main
-{
+public class Main {
+
+    // un solo Scanner para todo el programa
+    static Scanner leer = new Scanner(System.in);
 
     public static void main(String[] args) {
-     Scanner leer = new Scanner(System.in);
-        //
 
-        //Operation.saveHero(h1);
-
-
-        //Operation.readHeroes();
-        //GUI JAVA SWING
-        //.saveHero()
+        // crea la tabla si todavia no existe
+        Database.createTable();
 
         int opcion;
 
         do {
-            System.out.println("\n ************** CRUD MARVEL ***********");
-            System.out.println("1. Crear Heroe");
-            System.out.println("2. Mostrar heroes");
-            //TODO the rest of the operations
+            System.out.println("\n ************** CRUD TAYLOR SWIFT ***********");
+            System.out.println("1. Crear album");
+            System.out.println("2. Mostrar albumes");
+            System.out.println("3. Actualizar album");
+            System.out.println("4. Eliminar album");
             System.out.println("0. para salir");
-            System.out.println("\n ************** CRUD MARVEL ***********");
+            System.out.println("\n ************** CRUD TAYLOR SWIFT ***********");
 
             opcion = leer.nextInt();
+            leer.nextLine(); // limpia el enter que queda despues del numero
 
             switch (opcion) {
                 case 1:
-                    OperationsDB.saveHeroDB(nextHero());
-                    //OperationCSV.saveHero(nextHero());
+                    OperationsDB.saveAlbumDB(nextAlbum());
                     break;
                 case 2:
-                    OperationsDB.readAllHeroresDB();
-                    //OperationCSV.readHeroes();
+                    OperationsDB.readAllAlbumsDB();
+                    break;
+                case 3:
+                    System.out.println("Ingrese el ID del album a actualizar");
+                    int idActualizar = leer.nextInt();
+                    leer.nextLine();
+                    Album nuevo = nextAlbum();
+                    nuevo.setId(idActualizar);
+                    OperationsDB.updateAlbumDB(nuevo);
+                    break;
+                case 4:
+                    System.out.println("Ingrese el ID del album a eliminar");
+                    int idEliminar = leer.nextInt();
+                    leer.nextLine();
+                    OperationsDB.deleteAlbumDB(idEliminar);
                     break;
                 case 0:
                     System.out.println("Nos vemos");
                     break;
-
+                default:
+                    System.out.println("Opcion no valida");
             }
-        } while (opcion!=0);
-
-
-
-
-
+        } while (opcion != 0);
 
     }
 
-    public static Hero nextHero()
-    {
-        Scanner leer = new Scanner(System.in);
-        Hero h1 = new Hero();
+    // Pide los datos por consola y arma un Album
+    public static Album nextAlbum() {
+        Album a1 = new Album();
 
-        //Ingresar datos con los getter y setter
-        System.out.println("Ingrese el nombre del Hero");
-        h1.setName(leer.nextLine());
+        System.out.println("Ingrese el nombre del album");
+        a1.setName(leer.nextLine());
 
-        System.out.println("Ingrese el nombre secreto");
-        h1.setSecretName(leer.nextLine());
+        System.out.println("Ingrese el año de lanzamiento");
+        a1.setYear(leer.nextInt());
+        leer.nextLine();
 
-        //System.out.println("Ingrese el ID");
-        //h1.setId(leer.nextInt());
+        System.out.println("Ingrese los 3 sencillos (uno por linea)");
+        String[] tempSingles = new String[3];
+        tempSingles[0] = leer.nextLine();
+        tempSingles[1] = leer.nextLine();
+        tempSingles[2] = leer.nextLine();
+        a1.setSingles(tempSingles);
 
-        System.out.println("Ingrese los poderes");
-        String [] tempPowers = new String[3];
-        tempPowers[0]= leer.nextLine();
-        tempPowers[1]= leer.nextLine();
-        tempPowers[2]= leer.nextLine();
-        h1.setPowers(tempPowers);
+        System.out.println("Tiene Taylor's Version? (true/false)");
+        a1.setRerecorded(leer.nextBoolean());
+        leer.nextLine();
 
-        h1.setTeam(true);
-        return h1;
+        System.out.println("Es de mis favoritos? (true/false)");
+        a1.setFavorite(leer.nextBoolean());
+        leer.nextLine();
+
+        return a1;
     }
 
 }
