@@ -1,21 +1,28 @@
 package operations;
 
-import db.HeroDAO;
-import models.Hero;
+import db.AlbumDAO;
+import models.Album;
 
 public class OperationsDB {
 
-    private static final HeroDAO dao = new HeroDAO();
+    private static final AlbumDAO dao = new AlbumDAO();
 
-    public static void saveHeroDB(Hero h2save)
-    {
-        dao.saveDB(h2save);
+    public static void saveAlbumDB(Album a2save) {
+        dao.saveDB(a2save);
     }
 
-    public static void readAllHeroresDB(){
-    for (Hero h: dao.readAllHerosDB()){
-        System.out.println(h);
+    public static void readAllAlbumsDB() {
+        for (Album a : dao.readAllAlbumsDB()) {
+            System.out.println(a);
+        }
     }
+
+    public static void updateAlbumDB(Album a2update) {
+        dao.updateDB(a2update);
+    }
+
+    public static void deleteAlbumDB(int id) {
+        dao.deleteDB(id);
     }
 
 }
